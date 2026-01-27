@@ -24,24 +24,24 @@ type DefaultConfigurationType = {
 };
 
 export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
-  baseUrl: astroConfig.site || 'https://getcvfolio.com',
+  baseUrl: astroConfig.site || 'https://babystm.github.io/astro-blog',
   author: {
     avatar,
-    name: 'Javier Diaz Chamorro',
-    headline: 'Engineering and Design',
-    username: 'coderdiaz',
-    location: 'Mexico City',
+    name: 'Guitar',
+    headline: 'Solopreneur',
+    username: 'babystm',
+    location: 'Phuket, Thailand',
     pronouns: 'He/Him',
   },
   seo: {
-    title: 'CV Folio — An Astro template inspired on Read.cv',
+    title: 'Guitar — Dead Simple Productivity',
     description:
-      'Clean and aesthetic portfolio website for developers and designers',
+      'Solopreneur in Phuket sharing experiences, mindset, and tools for building an online business and digital nomad lifestyle',
     type: 'website',
     image: MetaDefaultImage,
     twitter: {
-      creator: '@cvfolio',
+      creator: '@babystm',
     },
-    robots: 'noindex, nofollow',
+    robots: 'index, follow',
   },
 };
