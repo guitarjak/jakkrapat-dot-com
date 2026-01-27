@@ -1,0 +1,43 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Author from '@/components/ui/Author.astro';
+import Container from '@/components/Container.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { DEFAULT_CONFIGURATION } from '@/lib/constants';
+
+const entry = await getEntry('pages', 'shop');
+const products = await getCollection('products');
+---
+
+<BaseLayout seo={entry.data.seo}>
+  <Container as='section' class='py-6'>
+    <Author {...DEFAULT_CONFIGURATION.author} />
+  </Container>
+  <Container as='section' class='py-6'>
+    <div class="flex flex-col gap-6">
+      <span class="text-headings">Products</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {products.map((product) => (
+          <a href={`/shop/${product.id}/`} class="group block">
+            <article class="border border-border rounded-2xl p-4 transition-all duration-300 hover:border-muted-foreground/60 hover:bg-muted-foreground/10">
+              <div class="aspect-square rounded-xl bg-muted-foreground/20 mb-4 flex items-center justify-center">
+                <span class="text-muted-foreground text-sm">No image</span>
+              </div>
+              <div class="flex flex-col gap-1">
+                <h3 class="text-headings font-medium group-hover:text-muted-foreground transition-colors">
+                  {product.data.title}
+                </h3>
+                <p class="text-muted-foreground text-sm line-clamp-2">
+                  {product.data.description}
+                </p>
+                <span class="text-foreground font-medium mt-2">
+                  {product.data.currency}{product.data.price}
+                </span>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+    </div>
+  </Container>
+</BaseLayout>

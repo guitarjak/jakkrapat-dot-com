@@ -6,6 +6,7 @@ const pathname = Astro.url.pathname;
 
 const isHomePage = pathname === '/';
 const isWritingPage = pathname.startsWith('/writing');
+const isShopPage = pathname.startsWith('/shop');
 
 const config = getSiteConfig();
 ---
@@ -39,6 +40,19 @@ const config = getSiteConfig();
                   isWritingPage &&
                     'text-headings bg-muted-foreground/40 rounded-full',
                 ]}>Writing</a
+              >
+            </li>
+          )}
+          {config.sections.shop && (
+            <li>
+              <a
+                href="/shop"
+                class:list={[
+                  'font-medium transition-colors block px-5 py-2',
+                  'hover:text-headings',
+                  isShopPage &&
+                    'text-headings bg-muted-foreground/40 rounded-full',
+                ]}>Shop</a
               >
             </li>
           )}

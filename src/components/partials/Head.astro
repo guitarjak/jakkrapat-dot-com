@@ -1,5 +1,5 @@
 ---
-import { getImage, Font } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import type { Seo } from '@/lib/constants'
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 import { generateAbsoluteUrl } from '@/lib/utils';
@@ -13,13 +13,25 @@ const { seo } = Astro.props;
 
 const image = await getImage({ src: seo?.image || defaultSeo.image, format: 'jpg'});
 const seoImage = generateAbsoluteUrl(image.src);
+
+// Import font file to get its URL
+const interVariable = import.meta.glob('/src/assets/fonts/InterVariable.woff2', { eager: true, query: '?url', import: 'default' });
+const interVariableUrl = interVariable['/src/assets/fonts/InterVariable.woff2'];
 ---
 <head>
   <meta charset="utf-8" />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <Font cssVariable="--font-inter" preload />
-  <Font cssVariable="--font-inter-variable" preload />
+  <link rel="preload" href={interVariableUrl} as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      src: url(interVariableUrl) format('woff2-variations');
+      font-weight: 100 900;
+      font-display: swap;
+      font-style: normal;
+    }
+  </style>
   { seo?.canonicalUrl && <link rel="canonical" href={seo?.canonicalUrl} />}
   <title>{seo?.title || defaultSeo.title}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,8 +60,7 @@ const seoImage = generateAbsoluteUrl(image.src);
   <script is:inline>
     // Prevent FOUC by applying theme before page renders
     (function() {
-      const theme = localStorage.getItem('theme') || 
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const theme = localStorage.getItem('theme') || 'light';
       if (theme === 'dark') {
         document.documentElement.classList.add('dark');
       }

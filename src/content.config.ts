@@ -77,10 +77,24 @@ const postCollection = defineCollection({
     }),
 });
 
+const productCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/products' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      price: z.number(),
+      currency: z.string().default('$'),
+      description: z.string(),
+      image: image().optional(),
+      available: z.boolean().default(true),
+    }),
+});
+
 export const collections = {
   pages: pageCollection,
   links: linkCollection,
   jobs: jobCollection,
   talks: talkCollection,
   posts: postCollection,
+  products: productCollection,
 };
