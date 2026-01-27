@@ -2,7 +2,8 @@
 import Container from '@/components/Container.astro';
 import { getSiteConfig } from '@/lib/config';
 
-const pathname = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname.replace(base, '') || '/';
 
 const isHomePage = pathname === '/';
 const isWritingPage = pathname.startsWith('/writing');
@@ -22,7 +23,7 @@ const config = getSiteConfig();
         <ul class="flex items-center gap-1">
           <li>
             <a
-              href="/"
+              href={`${base}/`}
               class:list={[
                 'font-medium transition-colors block px-5 py-2',
                 'hover:text-headings',
@@ -33,7 +34,7 @@ const config = getSiteConfig();
           {config.sections.writing && (
             <li>
               <a
-                href="/writing"
+                href={`${base}/writing`}
                 class:list={[
                   'font-medium transition-colors block px-5 py-2',
                   'hover:text-headings',
@@ -46,7 +47,7 @@ const config = getSiteConfig();
           {config.sections.shop && (
             <li>
               <a
-                href="/shop"
+                href={`${base}/shop`}
                 class:list={[
                   'font-medium transition-colors block px-5 py-2',
                   'hover:text-headings',
