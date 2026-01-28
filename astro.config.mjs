@@ -10,6 +10,7 @@ import { remarkReadingTime } from './src/lib/remark.mjs';
 export default defineConfig({
   site: 'https://jakkrapat.com',
   base: '/',
+  trailingSlash: 'always', // Ensures consistent URLs for GitHub Pages
   markdown: {
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {

@@ -1,0 +1,30 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<li class="py-0.5">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col">
+      {entry.data.url ? (
+        <a href={entry.data.url} class="text-headings font-medium hover:underline" target="_blank" rel="noopener noreferrer">
+          {entry.data.title}
+        </a>
+      ) : (
+        <span class="text-headings font-medium">{entry.data.title}</span>
+      )}
+      {entry.data.description && (
+        <span class="text-foreground text-sm">{entry.data.description}</span>
+      )}
+    </div>
+    <div class="prose dark:prose-invert prose-sm">
+      <Content />
+    </div>
+  </div>
+</li>

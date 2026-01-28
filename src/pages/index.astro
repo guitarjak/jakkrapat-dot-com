@@ -5,6 +5,7 @@ import Container from '@/components/Container.astro';
 import Author from '@/components/ui/Author.astro';
 import { DEFAULT_CONFIGURATION } from '@/lib/constants';
 import WorkExperience from '@/components/ui/WorkExperience.astro';
+import CreatingItem from '@/components/ui/CreatingItem.astro';
 import Talk from '@/components/ui/Talk.astro';
 import { sortByDateRange, sortByYear } from '@/lib/utils';
 import { getSiteConfig } from '@/lib/config';
@@ -19,8 +20,8 @@ const { Content } = await render(entry);
 
 const links = await getCollection('links');
 
-const jobs = await getCollection('jobs');
-const sortedJobs = sortByDateRange(jobs);
+const projects = await getCollection('projects');
+const sortedProjects = sortByDateRange(projects);
 
 const talks = await getCollection('talks');
 const sortedTalks = sortByYear(talks);
@@ -76,13 +77,13 @@ const config = getSiteConfig();
     )
   }
   {
-    config.sections.workExperience && sortedJobs.length > 0 && (
+    config.sections.creating && sortedProjects.length > 0 && (
       <Container as="section" class="py-6">
         <div class="flex flex-col gap-5">
-          <span class="text-headings">Work Experience</span>
-          <ul class="flex flex-col gap-8">
-            {sortedJobs.map((job) => (
-              <WorkExperience entry={job} />
+          <span class="text-headings">Creating</span>
+          <ul class="flex flex-col gap-4">
+            {sortedProjects.map((project) => (
+              <CreatingItem entry={project} />
             ))}
           </ul>
         </div>

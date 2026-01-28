@@ -1,7 +1,7 @@
 # Site Configuration - Control visibility of sections
 sections:
   about: true
-  workExperience: true
+  creating: true
   talks: true
   writing: true
   shop: true
