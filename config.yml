@@ -2,7 +2,8 @@
 sections:
   about: true
   creating: true
-  talks: true
+  otherStuff: false
+  posts: true
   writing: true
   shop: true
   socialLinks: true

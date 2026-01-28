@@ -9,6 +9,12 @@ const isHomePage = pathname === '/';
 const isWritingPage = pathname.startsWith('/writing');
 const isShopPage = pathname.startsWith('/shop');
 
+// Helper to create proper URLs (avoid double slashes)
+const createUrl = (path: string) => {
+  const cleanBase = base.endsWith('/') ? base.slice(0, -1) : base;
+  return path === '/' ? base : `${cleanBase}${path}`;
+};
+
 const config = getSiteConfig();
 ---
 {config.elements.header && (
@@ -23,7 +29,7 @@ const config = getSiteConfig();
         <ul class="flex items-center gap-1">
           <li>
             <a
-              href={`${base}/`}
+              href={createUrl('/')}
               class:list={[
                 'font-medium transition-colors block px-5 py-2',
                 'hover:text-headings',
@@ -34,7 +40,7 @@ const config = getSiteConfig();
           {config.sections.writing && (
             <li>
               <a
-                href={`${base}/writing`}
+                href={createUrl('/writing')}
                 class:list={[
                   'font-medium transition-colors block px-5 py-2',
                   'hover:text-headings',
@@ -47,7 +53,7 @@ const config = getSiteConfig();
           {config.sections.shop && (
             <li>
               <a
-                href={`${base}/shop`}
+                href={createUrl('/shop')}
                 class:list={[
                   'font-medium transition-colors block px-5 py-2',
                   'hover:text-headings',

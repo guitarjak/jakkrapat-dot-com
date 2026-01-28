@@ -27,11 +27,10 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
   baseUrl: astroConfig.site || 'https://babystm.github.io/astro-blog',
   author: {
     avatar,
-    name: 'Guitar',
-    headline: 'Solopreneur',
-    username: 'babystm',
+    name: 'Jakkrapat Ampring',
+    headline: 'Solopreneur + Daddy',
+    username: 'GuitarDSP',
     location: 'Phuket, Thailand',
-    pronouns: 'He/Him',
   },
   seo: {
     title: 'Guitar — Dead Simple Productivity',
@@ -40,7 +39,7 @@ export const DEFAULT_CONFIGURATION: DefaultConfigurationType = {
     type: 'website',
     image: MetaDefaultImage,
     twitter: {
-      creator: '@babystm',
+      creator: '@GuitarDSP',
     },
     robots: 'index, follow',
   },

@@ -53,18 +53,8 @@ const projectCollection = defineCollection({
       to: z.number().optional(), // optional if currently working
       url: z.string().optional(),
       images: z.array(image()).optional(),
+      order: z.number().optional(),
     }),
-});
-
-const talkCollection = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/talks' }),
-  schema: z.object({
-    title: z.string(),
-    year: z.number(),
-    event: z.string(),
-    location: z.string(),
-    url: z.string(),
-  }),
 });
 
 const postCollection = defineCollection({
@@ -91,11 +81,22 @@ const productCollection = defineCollection({
     }),
 });
 
+const otherStuffCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/other-stuff' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      url: z.string().optional(),
+      order: z.number().optional(),
+    }),
+});
+
 export const collections = {
   pages: pageCollection,
   links: linkCollection,
   projects: projectCollection,
-  talks: talkCollection,
   posts: postCollection,
   products: productCollection,
+  otherStuff: otherStuffCollection,
 };
